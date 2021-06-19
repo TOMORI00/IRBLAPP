@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="repository" type="repository类型"/>
+
+    <xs:complexType name="repository类型">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="commit" type="commit类型"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="commit类型">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="fixedFiles" type="fixedFiles类型"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="author" type="xs:string"/>
+        <xs:attribute name="date" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="fixedFiles类型">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="file" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

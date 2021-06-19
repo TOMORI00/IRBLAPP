@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="bugrepository" type="bugrepository类型"/>
+
+    <xs:complexType name="bugrepository类型">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="bug" type="bug类型"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="bug类型">
+        <xs:sequence>
+            <xs:element name="buginformation" type="buginformation类型"/>
+            <xs:element name="fixedFiles" type="fixedFiles类型"/>
+            <xs:element name="reporter" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="fixdate" type="xs:string"/>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="opendate" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="buginformation类型">
+        <xs:sequence>
+            <xs:element name="summary" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="fixedFiles类型">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="file" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

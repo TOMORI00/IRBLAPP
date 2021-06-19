@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<repository
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="commits.xsd"
+        name="AspectJ">
+    <commit id="ab0c79c" author="aclement" date="2010-10-31">
+        <title>329111</title>
+        <fixedFiles>
+            <file>asm/src/org/aspectj/asm/IProgramElement.java</file>
+            <file>asm/src/org/aspectj/asm/internal/JDTLikeHandleProvider.java</file>
+        </fixedFiles>
+    </commit>
+    <commit id="f759138" author="aclement" date="2010-10-31">
+        <title>329111</title>
+        <fixedFiles>
+            <file>tests/src/org/aspectj/systemtest/incremental/tools/MultiProjectIncrementalTests.java</file>
+        </fixedFiles>
+    </commit>
+</repository>

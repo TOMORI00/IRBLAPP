@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+</head>
+<body>
+<div th:text="'TOP1: '+${Top1}"></div>
+<div th:text="'TOP5: '+${Top5}"></div>
+<div th:text="'TOP10: '+${Top10}"></div>
+<div th:text="'MRR: '+${MRR}"></div>
+<div th:text="'MAP: '+${MAP}"></div>
+<table class="table table-striped table-bordered table-hover text-center" >
+    <thead>
+    <tr style="text-align:center">
+        <th>Name</th>
+        <th>RecommendList</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recommend:${recommendList}">
+        <td th:text="${recommend.reportName}"></td>
+        <td th:text="${recommend.recommendFiles}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
