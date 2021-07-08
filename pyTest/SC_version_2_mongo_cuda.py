@@ -8,7 +8,7 @@ import cupy as cp
 import numpy as np
 import pymongo
 
-from loadModule_aspectj import LoadModule
+from loadModule_eclipse import LoadModule
 
 
 # todo one-hot向量去除key
@@ -54,7 +54,7 @@ class StructureHandler:
         self.summaries_tfidf = self.loadModule.read_summaries_tfidf()
         self.descriptions_tfidf = self.loadModule.read_descriptions_tfidf()
         # 计算所有文档数量
-        self.doc_num = 15436
+        self.doc_num = 20526
         # 计算相似度 reportName{source code: sim}
         self.result = {}
         self.build_sim()
@@ -89,9 +89,9 @@ class StructureHandler:
         # one-hot，对于每一个source code都是0
         count = 0
         zero_vector = OrderedDict((token, 0.0) for token in self.codes.keys())
-        report_list = list(self.reports.keys())[240:260]
+        report_list = list(self.reports.keys())[950:1000]
         for reportName in report_list:
-            if self.db['SC_AspectJ'].find_one({'report_id': reportName}) is not None:
+            if self.db['SC_Eclipse'].find_one({'report_id': reportName}) is not None:
                 continue
             vec = copy.copy(zero_vector)
             # 每一个source code都算相似度 （8个）
@@ -101,11 +101,11 @@ class StructureHandler:
                 sim += cosine_sim(self.summaries_tfidf[reportName], self.methods_tfidf[codeName])
                 sim += cosine_sim(self.summaries_tfidf[reportName], self.classes_tfidf[codeName])
                 sim += cosine_sim(self.summaries_tfidf[reportName], self.attributes_tfidf[codeName])
-                sim += cosine_sim(self.summaries_tfidf[reportName], self.comments_tfidf[codeName])*0.5
+                sim += cosine_sim(self.summaries_tfidf[reportName], self.comments_tfidf[codeName]) * 0.5
                 sim += cosine_sim(self.descriptions_tfidf[reportName], self.methods_tfidf[codeName])
                 sim += cosine_sim(self.descriptions_tfidf[reportName], self.classes_tfidf[codeName])
                 sim += cosine_sim(self.descriptions_tfidf[reportName], self.attributes_tfidf[codeName])
-                sim += cosine_sim(self.descriptions_tfidf[reportName], self.comments_tfidf[codeName])*0.5
+                sim += cosine_sim(self.descriptions_tfidf[reportName], self.comments_tfidf[codeName]) * 0.5
                 # vec[codeName] = float(sim)
                 len_score = 1 / (1 + math.exp(
                     -1 * normalize(len(self.codes[codeName]), self.min_len_codes, self.max_len_codes)))
@@ -119,13 +119,12 @@ class StructureHandler:
             # 存入mongodb
             self.result[reportName] = vec
             # 存入mongodb
-            if self.db['SC_AspectJ'].find_one({'report_id': reportName}) is None:
-                self.db['SC_AspectJ'].insert_one({'report_id': reportName, 'score_list': score_list})
+            if self.db['SC_Eclipse'].find_one({'report_id': reportName}) is None:
+                self.db['SC_Eclipse'].insert_one({'report_id': reportName, 'score_list': score_list})
                 count += 1
                 print(count)
                 print(reportName)
                 print('=========')
-
 
 
 if __name__ == '__main__':

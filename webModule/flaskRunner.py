@@ -106,7 +106,7 @@ def schedule(project, path='D://target', TestRatio=95):
 def schedule_VHC(project, path):
     with open(path + "/" + "JSON-DATE-" + project + "CommitRepository.json", 'r', encoding='utf8')as fp:
         commitdate_dic = json.load(fp)
-    with open(path + "/" + "JSON-FIXEDFILES-" + project + "CommitRepository.json", 'r', encoding='utf8')as fp:
+    with open(path + "/" + "JSON-FIXEDFILES-" + project + "CommitRepository.json", 'r', encoding='gbk')as fp:
         fixfile_dic = json.load(fp)
     with open(path + "/" + "JSON-OPENDATE-New" + project + "BugRepository.json", 'r', encoding='utf8')as fp:
         opendate_dic = json.load(fp)
